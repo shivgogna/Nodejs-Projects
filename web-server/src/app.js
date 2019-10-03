@@ -36,7 +36,7 @@ app.get('/help', (req, res) => {
     res.render('./help', {
         helpTex: 'This is some helpful text',
         title: 'Help',
-        name: 'Shiv Gogna'
+        name: 'Shiv Gogna',
     })
 })
 
@@ -45,6 +45,30 @@ app.get('/weather', (req, res) => {
         title: 'Weather',
         location: 'Corona',
         forecast: 'It is bright and sunny'
+    })
+})
+
+app.get('/help/*', (req, res) => {
+    res.render('404', {
+        title: '404',
+        name: 'Shiv Gogna',
+        errorMessage: 'Help article not found'
+    })
+})
+
+app.get('/about/*', (req, res) => {
+    res.render('404', {
+        title: '404',
+        name: 'Shiv Gogna',
+        errorMessage: 'Help page not found'
+    })
+})
+
+app.get('*', (req, res) => {
+    res.render('404', {
+        title: '404',
+        name: 'Shiv Gogna',
+        errorMessage: 'Page Not Found'
     })
 })
 
