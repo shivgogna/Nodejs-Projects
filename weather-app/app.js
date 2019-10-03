@@ -1,20 +1,26 @@
 const geocode = require("./utils/geocode");
 const forecast = require('./utils/forecast')
 
-// request({url: url, json: true}, (error, response) => {
-//     if(error) {
-//         console.log('Unable to conenct to weather service!')
-//     } else if(response.body.error) {
-//         console.log('Unable to conenct to weather service!')
-//     } else {
-//         console.log(`${response.body.daily.data[0].summary} It is currently ${response.body.currently.temperature} degrees out. There is a ${response.body.currently.precipProbability}% chance of rain.`)
-//     }
-// });
+const address = process.argv[2];
 
-forecast(-75.7088, 44.1545, (error, data) => {
-  console.log("Error", error);
-  console.log("Data", data);
-});
+if(!address) {
+  console.log('Please provide an address')
+} else {
+  geocode(address, (error, data) => {
+    if(error) {
+      return console.log(error)
+    }
+  
+    forecast(data.latitude, data.longitude, (error, forecastData) => {
+      if(error) {
+        return console.log(error)
+      }
+  
+      console.log(data.location)
+      console.log(forecast)
+    });
+  });
+}
 
 // request({url: gecodeURL, json: true},(error, response) => {
 //     if(error) {
@@ -28,7 +34,13 @@ forecast(-75.7088, 44.1545, (error, data) => {
 //     }
 // });
 
-geocode("Corona", (error, data) => {
-  console.log("Error", error);
-  console.log("Data", data);
-});
+// request({url: url, json: true}, (error, response) => {
+//     if(error) {
+//         console.log('Unable to conenct to weather service!')
+//     } else if(response.body.error) {
+//         console.log('Unable to conenct to weather service!')
+//     } else {
+//         console.log(`${response.body.daily.data[0].summary} It is currently ${response.body.currently.temperature} degrees out. There is a ${response.body.currently.precipProbability}% chance of rain.`)
+//     }
+// });
+
