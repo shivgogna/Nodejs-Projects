@@ -13,7 +13,7 @@ const User = mongoose.model('User', {
         trim: true,
         lowercase: true,
         validate(value) {
-            if(!validator.isEmail(value)) {
+            if (!validator.isEmail(value)) {
                 throw new Error('Email is invalid')
             }
         }
@@ -21,10 +21,10 @@ const User = mongoose.model('User', {
     password: {
         type: String,
         required: true,
+        minlength: 7,
         trim: true,
-        minLength: 7,
         validate(value) {
-            if(value.toLowerCase().includes('password')) {
+            if (value.toLowerCase().includes('password')) {
                 throw new Error('Password cannot contain "password"')
             }
         }
@@ -33,8 +33,8 @@ const User = mongoose.model('User', {
         type: Number,
         default: 0,
         validate(value) {
-            if(value < 0) {
-                throw new Error('Age must be a positive number')
+            if (value < 0) {
+                throw new Error('Age must be a postive number')
             }
         }
     }
