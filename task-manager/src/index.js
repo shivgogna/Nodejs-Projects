@@ -14,9 +14,9 @@ const port = process.env.PORT || 3000
 //     }
 // })
 
-app.use((req, res, next) => {
-    res.status(503).send('Site is currently down')
-})
+// app.use((req, res, next) => {
+//     res.status(503).send('Site is currently down')
+// })
 
 app.use(express.json())
 app.use(userRouter)
